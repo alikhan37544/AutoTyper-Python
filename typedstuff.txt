@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool isDiamond(const string& name) {
+    vector<string> gemstones = {"Garnet", "Amethyst", "Aquamarine", "Diamond", "Emerald", "Pearl", "Ruby", "Peridot", "Sapphire", "Tourmaline", "Topaz", "Lapis"};
+    
+    for (const string& gem : gemstones) {
+        if (name.find(gem) != string::npos) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+bool compareNames(const string& a, const string& b) {
+    if (isDiamond(a) && !isDiamond(b)) {
+        return true;
+    }
+    else if (!isDiamond(a) && isDiamond(b)) {
+        return false;
+    }
+    else {
+        return a < b;
+    }
+}
+
+int main() {
+    vector<string> chariots;
+    string name;
+    
+    while (true) {
+        cin >> name;
+        if (name == "END") {
+            break;
+        }
+        chariots.push_back(name);
+    }
+    
+    sort(chariots.begin(), chariots.end(), compareNames);
+    
+    for (const string& chariot : chariots) {
+        cout << chariot << endl;
+    }
+    
+    return 0;
+}
